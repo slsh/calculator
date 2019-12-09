@@ -50,8 +50,6 @@ namespace Graphing
     {
         virtual ~IMathSolver() = default;
 
-        static GRAPHINGAPI std::unique_ptr<IMathSolver> CreateMathSolver();
-
         virtual IParsingOptions& ParsingOptions() = 0;
         virtual IEvalOptions& EvalOptions() = 0;
         virtual IFormatOptions& FormatOptions() = 0;
@@ -66,3 +64,5 @@ namespace Graphing
 		virtual Graphing::IGraphFunctionAnalysisData Analyze(const Graphing::Analyzer::IGraphAnalyzer* analyzer) = 0;
     };
 }
+
+__declspec(dllexport) std::unique_ptr<IMathSolver> CreateMathSolver();
