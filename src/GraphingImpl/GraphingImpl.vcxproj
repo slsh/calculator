@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.Windows.Apps.Graphing.2.0.4\build\native\Microsoft.Windows.Apps.Graphing.props" Condition="Exists('..\..\packages\Microsoft.Windows.Apps.Graphing.2.0.4\build\native\Microsoft.Windows.Apps.Graphing.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
@@ -266,35 +267,48 @@
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\GraphingInterfaces\Common.h" />
-    <ClInclude Include="..\GraphingInterfaces\GraphingEnums.h" />
-    <ClInclude Include="..\GraphingInterfaces\IGraph.h" />
-    <ClInclude Include="..\GraphingInterfaces\IGraphAnalyzer.h" />
-    <ClInclude Include="..\GraphingInterfaces\IGraphingOptions.h" />
-    <ClInclude Include="..\GraphingInterfaces\IGraphRenderer.h" />
-    <ClInclude Include="..\GraphingInterfaces\IMathSolver.h" />
-    <ClInclude Include="..\GraphingInterfaces\IEquation.h" />
-    <ClInclude Include="..\GraphingInterfaces\IEquationOptions.h" />
-    <ClInclude Include="Mocks\MathSolver.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Mocks\MathSolver.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+    <ItemGroup>
+        <ClInclude Include="..\GraphingInterfaces\Common.h" />
+        <ClInclude Include="..\GraphingInterfaces\GraphingEnums.h" />
+        <ClInclude Include="..\GraphingInterfaces\IGraph.h" />
+        <ClInclude Include="..\GraphingInterfaces\IGraphAnalyzer.h" />
+        <ClInclude Include="..\GraphingInterfaces\IGraphingOptions.h" />
+        <ClInclude Include="..\GraphingInterfaces\IGraphRenderer.h" />
+        <ClInclude Include="..\GraphingInterfaces\IMathSolver.h" />
+        <ClInclude Include="..\GraphingInterfaces\IEquation.h" />
+        <ClInclude Include="..\GraphingInterfaces\IEquationOptions.h" />
+        <!--<ClInclude Include="Mocks\MathSolver.h" Condition="!Exists('ConcreteTypes\MathSolver.h')"/>-->
+        <ClInclude Include="pch.h" />
+        <ClInclude Include="targetver.h" />
+        <ClInclude Include="EnumMappings_FromOmsaut.h" />
+        <ClInclude Include="EnumMappings_ToOmsaut.h" />
+        <ClInclude Include="Bitmap.h" />
+        <ClInclude Include="DefaultProxy.h" />
+        <ClInclude Include="ConcreteTypes\Equation.h" />
+        <ClInclude Include="ConcreteTypes\EquationOptions.h" />
+        <ClInclude Include="ConcreteTypes\Expression.h" />
+        <ClInclude Include="ConcreteTypes\Graph.h" />
+        <ClInclude Include="ConcreteTypes\GraphAnalyzer.h" />
+        <ClInclude Include="ConcreteTypes\GraphingOptions.h" />
+        <ClInclude Include="ConcreteTypes\GraphRenderer.h" />
+        <ClInclude Include="ConcreteTypes\MathSolver.h" />
+        <ClInclude Include="ConcreteTypes\Variable.h" />
+    </ItemGroup>
+    <ItemGroup>
+        <ClCompile Include="dllmain.cpp" />
+        <!--<ClCompile Include="Mocks\MathSolver.cpp" Condition="!Exists('ConcreteTypes\MathSolver.cpp')" />-->
+        <ClInclude Include="ConcreteTypes\Graph.cpp" />
+        <ClInclude Include="ConcreteTypes\GraphAnalyzer.cpp" />
+        <ClInclude Include="ConcreteTypes\GraphingOptions.cpp" />
+        <ClInclude Include="ConcreteTypes\MathSolver.cpp" />
+        <ClCompile Include="pch.cpp">
+            <PrecompiledHeader>Create</PrecompiledHeader>
+        </ClCompile>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="packages.config" Condition="Exists('packages.config')" />
+    </ItemGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+    <ImportGroup Label="ExtensionTargets">
+    </ImportGroup>
 </Project>
